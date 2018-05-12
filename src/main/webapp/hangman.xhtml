@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:view contentType="text/html">
+		<h:head>						
+			<h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"></h:outputStylesheet>
+			<script src="js/geral.js"></script>	
+		</h:head>
+	
+		<h:body>
+			<h:form id="form">
+				<h1>The PSWEB Hangman</h1> <h5>Timer:     <h:outputText id="timer_count" value="#{timer.number}s" />
+														  <p:poll interval="3" listener="#{timer.increment}" update="timer_count"/></h5>
+    									   
+				<hr/>	
+				<h2>Word: <h:outputText value="#{hangmanBean.word}" /></h2>
+				<br/>
+				<h2>Chances: <h:outputText value="#{hangmanBean.chances}" /></h2>
+				<br/>
+				<h2>Attempts: <h:outputText value="#{hangmanBean.attempts}" /></h2>
+				<br/>			
+				Pick a Letter: <p:inputText value="#{hangmanBean.letter}" 
+				                            maxlength="1"
+				                            readonly="#{hangmanBean.gameOver}">
+									<p:ajax event="keyup" update="form" />
+							   </p:inputText>
+				<p:commandButton value="Guess" 
+				                 actionListener="#{hangmanBean.guess()}"
+				                 disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
+				                 icon="ui-icon-check"
+				                 update="form"/>
+				<p:commandButton value="Reset" 
+								 icon="fa fa-refresh"
+								 type="button"
+				                 actionListener="#{hangmanBean.reset()}"
+				                 onsuccess="#{timer.reset()}"
+				                 update="form"/>		
+				
+				<ui:fragment rendered="#{hangmanBean.gameOver}">
+					<hr/> 
+					<h1>				
+						<h:outputText value="Congratulations, you guessed!" 
+									  rendered="#{hangmanBean.gameWin}"/>
+						<h:outputText value="You are dead, hanged dead... the correct answer is: #{hangmanBean.answerAsString}"  
+						              rendered="#{hangmanBean.gameLose}"/>
+					</h1>
+				</ui:fragment>					
+			</h:form>
+			<h:form id="formDifficult">
+			Choose a Difficult: <p:outputLabel for="difficult" />
+			   <p:selectOneRadio id="difficult" value="#{hangmanBean.difficult}">
+		            <f:selectItem itemLabel="Easy" itemValue="Easy" icon = "fa-font"/>
+		            <f:selectItem itemLabel="Medium" itemValue="Medium" />
+		            <f:selectItem itemLabel="Hard" itemValue="Hard" />
+		        </p:selectOneRadio>			
+		        		 Set the Difficult:<p:commandButton value="Set" 
+							     actionListener="#{hangmanBean.reset()}"
+							     icon="ui-icon-check"
+				                 update="formDifficult form"
+				                 />		
+		        </h:form>			
+		</h:body>
+	</f:view>
+</html>
