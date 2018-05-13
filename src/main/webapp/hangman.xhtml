@@ -7,7 +7,6 @@
 
 	<f:view contentType="text/html">
 		<h:head>						
-			<h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"></h:outputStylesheet>
 			<script src="js/geral.js"></script>	
 		</h:head>
 	
@@ -17,7 +16,7 @@
 														  <p:poll interval="3" listener="#{timer.increment}" update="timer_count"/></h5>
     									   
 				<hr/>	
-				<h2>Word: <h:outputText value="#{hangmanBean.word}" /></h2>
+				<h2>Word: <h:outputText value="#{hangmanBean.word}" /> <p:graphicImage value ="#{hangmanBean.hangmanImage}"/></h2>
 				<br/>
 				<h2>Chances: <h:outputText value="#{hangmanBean.chances}" /></h2>
 				<br/>
@@ -35,9 +34,7 @@
 				                 update="form"/>
 				<p:commandButton value="Reset" 
 								 icon="fa fa-refresh"
-								 type="button"
 				                 actionListener="#{hangmanBean.reset()}"
-				                 onsuccess="#{timer.reset()}"
 				                 update="form"/>		
 				
 				<ui:fragment rendered="#{hangmanBean.gameOver}">
