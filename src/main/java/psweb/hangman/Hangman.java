@@ -16,10 +16,6 @@ public class Hangman
 	}
 	
 	// Sorteia uma nova palavra
-	public void reset()
-	{
-		//reset("Hello"); // TODO - Buscar de um dicionario		
-	}
 	
 	public void reset(List<Word> forcedWord)
 	{

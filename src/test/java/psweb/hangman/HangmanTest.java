@@ -12,7 +12,7 @@ public class HangmanTest
 	{
 		// Inicia um novo jogo
 		Hangman hangman = new Hangman();
-		hangman.reset();
+		//hangman.reset();
 		
 		// Testa a palavra inicial
 		String wordWithMask = hangman.getWordAsString();

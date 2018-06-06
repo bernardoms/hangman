@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 @Configuration
-@PropertySource("classpath:resource/hangman.properties")
 
 public abstract class _Bean 
 {
@@ -32,14 +30,10 @@ public abstract class _Bean
 	
 	public _Bean() {
 		String line = "";
-		Properties prop = new Properties();
 		Locale.setDefault(new Locale("pt","BR"));
 		try {
 			
-			InputStream inputProp = new FileInputStream("C:\\Users\\Bernardo\\Desktop\\hangman\\src\\main\\resources\\hangman.properties");
-			prop.load(inputProp);
-			this.dicFolder = (prop.getProperty("dic.folder"));
-			FileInputStream input = new FileInputStream(dicFolder + "\\dicionario.dic");
+			InputStream input= new FileInputStream(getClass().getClassLoader().getResource("dicionario.dic").getPath());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 			
 			while((line = reader.readLine()) != null) {

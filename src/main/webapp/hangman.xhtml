@@ -12,9 +12,7 @@
 	
 		<h:body>
 			<h:form id="form">
-				<h1>The PSWEB Hangman</h1> <h5>Timer:     <h:outputText id="timer_count" value="#{timer.number}s" />
-														  <p:poll interval="3" listener="#{timer.increment}" update="timer_count"/></h5>
-    									   
+				<h1>The PSWEB Hangman</h1> 
 				<hr/>	
 				<h2>Word: <h:outputText value="#{hangmanBean.word}" /> <p:graphicImage value ="#{hangmanBean.hangmanImage}"/></h2>
 				<br/>
